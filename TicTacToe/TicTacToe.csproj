@@ -67,6 +67,7 @@
     <Compile Include="Models\EGameStatus.cs" />
     <Compile Include="Services\IAIPlayer.cs" />
     <Compile Include="Services\IGameChecker.cs" />
+    <Compile Include="Services\Implementations\GameChecker.cs" />
     <Compile Include="Services\Implementations\NullAIPlayer.cs" />
     <Compile Include="Services\Implementations\NullGameChecker.cs" />
     <Compile Include="ViewModels\MainWindowViewModel.cs" />

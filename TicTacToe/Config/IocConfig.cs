@@ -18,7 +18,7 @@ namespace TicTacToe.Config
             builder.RegisterType<MainWindowViewModel>()
                    .AsSelf();
 
-            builder.RegisterType<NullGameChecker>()
+            builder.RegisterType<GameChecker>()
                    .As<IGameChecker>();
 
             builder.RegisterType<NullAIPlayer>()
