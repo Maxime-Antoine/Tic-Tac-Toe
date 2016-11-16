@@ -22,6 +22,9 @@ namespace TicTacToe.ViewModels
 
         private bool _pendingPlayerAction;
 
+        /// <summary>
+        /// Is it player's turn ?
+        /// </summary>
         public bool PendingPlayerAction
         {
             get { return _pendingPlayerAction; }
@@ -32,6 +35,8 @@ namespace TicTacToe.ViewModels
             }
         }
 
+        // -------- Cases ------------
+                     
         private string _c_1_1;
 
         public string C_1_1
@@ -146,6 +151,10 @@ namespace TicTacToe.ViewModels
 
         private ICommand _caseClicked;
 
+        /// <summary>
+        /// Command ran when player tick a case, takes the case adress as parameter
+        /// Can be ran if the target case is free
+        /// </summary>
         public ICommand CaseClicked
         {
             get
@@ -160,6 +169,10 @@ namespace TicTacToe.ViewModels
 
         private ICommand _reset;
 
+        /// <summary>
+        /// Command ran to reset the game, takes no parameter
+        /// Can be ran if a game has started
+        /// </summary>
         public ICommand Reset
         {
             get
@@ -176,6 +189,10 @@ namespace TicTacToe.ViewModels
 
         #region Private Methods
 
+        /// <summary>
+        /// Player played event handler
+        /// </summary>
+        /// <param name="adress">Adress of the case player ticked, ex: C_1_2</param>
         private void OnPlayerPlayed(string adress)
         {
             PendingPlayerAction = false;
@@ -204,11 +221,19 @@ namespace TicTacToe.ViewModels
             PendingPlayerAction = true;
         }
 
+        /// <summary>
+        /// Test if a case is empty
+        /// </summary>
+        /// <param name="adress">Adress of the case, ex: C_1_2</param>
+        /// <returns>True if empty, false if not</returns>
         private bool IsCaseEmpty(string adress)
         {
             return GetType().GetProperty(adress).GetValue(this) == null;
         }
 
+        /// <summary>
+        /// Reset the case observable properties
+        /// </summary>
         private void ResetGame()
         {
             C_1_1 = null;
@@ -222,6 +247,10 @@ namespace TicTacToe.ViewModels
             C_3_3 = null;
         }
 
+        /// <summary>
+        /// Test if the game can be reset
+        /// </summary>
+        /// <returns>True if a game has started, false instead</returns>
         private bool CanResetGame()
         {
             for (var i = 1; i <= 3; i++)
@@ -232,6 +261,10 @@ namespace TicTacToe.ViewModels
             return false;
         }
 
+        /// <summary>
+        /// Build a board object from the case observable properties values
+        /// </summary>
+        /// <returns>ECaseValue[3,3] board object</returns>
         private ECaseValue[,] BuildBoardFromObservableProperties()
         {
             return new ECaseValue[3, 3]
@@ -242,6 +275,11 @@ namespace TicTacToe.ViewModels
             };
         }
 
+        /// <summary>
+        /// Convert a string from a case observable property to the corresponding ECaseValue
+        /// </summary>
+        /// <param name="str">String case content</param>
+        /// <returns>Corresponding ECaseValue</returns>
         private ECaseValue ConvertStringToECaseValue(string str)
         {
             if (String.IsNullOrWhiteSpace(str))
@@ -250,6 +288,10 @@ namespace TicTacToe.ViewModels
             return (ECaseValue)Enum.Parse(typeof(ECaseValue), str);
         }
 
+        /// <summary>
+        /// Update case observable properties from a board object
+        /// </summary>
+        /// <param name="board">ECaseValue[3,3] board object</param>
         private void UpdateObservablePropertiesFromBoard(ECaseValue[,] board)
         {
             for (var i = 1; i <= 3; i++)
