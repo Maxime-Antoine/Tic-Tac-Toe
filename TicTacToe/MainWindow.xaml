@@ -19,6 +19,7 @@
                 </Style.Triggers>
             </Style>
         </Grid.Style>
+        <Button x:Name="resetBtn" Content="Reset" Command="{Binding Reset}" HorizontalAlignment="Left" Margin="123,34,0,0" VerticalAlignment="Top" Width="75"/>
         <Button x:Name="case_1_1" Content="{Binding C_1_1}" Command="{Binding CaseClicked}" CommandParameter="C_1_1" HorizontalAlignment="Left" Margin="52,105,0,0" VerticalAlignment="Top" Width="50" Height="50" />
         <Button x:Name="case_1_2" Content="{Binding C_1_2}" Command="{Binding CaseClicked}" CommandParameter="C_1_2" HorizontalAlignment="Left" Margin="123,105,0,0" VerticalAlignment="Top" Width="50" Height="50" />
         <Button x:Name="case_1_3" Content="{Binding C_1_3}" Command="{Binding CaseClicked}" CommandParameter="C_1_3" HorizontalAlignment="Left" Margin="195,105,0,0" VerticalAlignment="Top" Width="50" Height="50" />

@@ -158,6 +158,20 @@ namespace TicTacToe.ViewModels
             }
         }
 
+        private ICommand _reset;
+
+        public ICommand Reset
+        {
+            get
+            {
+                if (_reset == null)
+                    _reset = new RelayCommand<object>((object o) => ResetGame(),
+                                                      (object o) => CanResetGame());
+
+                return _reset;
+            }
+        }
+
         #endregion Commands
 
         #region Private Methods
@@ -179,11 +193,11 @@ namespace TicTacToe.ViewModels
                     UpdateObservablePropertiesFromBoard(newBoard);
                     var newStatus = _gameChecker.CheckGame(newBoard);
                     if (newStatus != EGameStatus.Running)
-                        Reset();
+                        ResetGame();
                     break;
 
                 default: //somebody won or tie
-                    Reset();
+                    ResetGame();
                     break;
             }
 
@@ -195,17 +209,27 @@ namespace TicTacToe.ViewModels
             return GetType().GetProperty(adress).GetValue(this) == null;
         }
 
-        private void Reset()
+        private void ResetGame()
         {
-            C_1_1 = "";
-            C_1_2 = "";
-            C_1_3 = "";
-            C_2_1 = "";
-            C_2_2 = "";
-            C_2_3 = "";
-            C_3_1 = "";
-            C_3_2 = "";
-            C_3_3 = "";
+            C_1_1 = null;
+            C_1_2 = null;
+            C_1_3 = null;
+            C_2_1 = null;
+            C_2_2 = null;
+            C_2_3 = null;
+            C_3_1 = null;
+            C_3_2 = null;
+            C_3_3 = null;
+        }
+
+        private bool CanResetGame()
+        {
+            for (var i = 1; i <= 3; i++)
+                for (var j = 1; j <= 3; j++)
+                    if (GetType().GetProperty("C_" + i + "_" + j).GetValue(this) != null)
+                        return true;
+
+            return false;
         }
 
         private ECaseValue[,] BuildBoardFromObservableProperties()
