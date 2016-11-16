@@ -1,10 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Configuration;
-using System.Data;
-using System.Linq;
-using System.Threading.Tasks;
+﻿using Autofac;
 using System.Windows;
+using TicTacToe.Config;
 
 namespace TicTacToe
 {
@@ -13,5 +9,11 @@ namespace TicTacToe
     /// </summary>
     public partial class App : Application
     {
+        public IContainer DependencyResolver { get; private set; }
+
+        public App()
+        {
+            DependencyResolver = IocConfig.CreateContainer();
+        }
     }
 }

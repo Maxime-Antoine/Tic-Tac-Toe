@@ -5,8 +5,28 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:TicTacToe"
         mc:Ignorable="d"
-        Title="MainWindow" Height="350" Width="525">
+        Title="TicTacToe" Height="350" Width="315"
+        DataContext="{Binding Source={StaticResource ViewModelLocator}, Path=MainWindow}">
     <Grid>
-        
+        <Grid.Style>
+            <Style TargetType="Grid">
+                <Setter Property="IsEnabled" Value="True" />
+                <Style.Triggers>
+                    <!-- Disable the board when it's not player's turn -->
+                    <DataTrigger Binding="{Binding PendingPlayerAction}" Value="False">
+                        <Setter Property="IsEnabled" Value="False" />
+                    </DataTrigger>
+                </Style.Triggers>
+            </Style>
+        </Grid.Style>
+        <Button x:Name="case_1_1" Content="{Binding C_1_1}" Command="{Binding CaseClicked}" CommandParameter="C_1_1" HorizontalAlignment="Left" Margin="52,105,0,0" VerticalAlignment="Top" Width="50" Height="50" />
+        <Button x:Name="case_1_2" Content="{Binding C_1_2}" Command="{Binding CaseClicked}" CommandParameter="C_1_2" HorizontalAlignment="Left" Margin="123,105,0,0" VerticalAlignment="Top" Width="50" Height="50" />
+        <Button x:Name="case_1_3" Content="{Binding C_1_3}" Command="{Binding CaseClicked}" CommandParameter="C_1_3" HorizontalAlignment="Left" Margin="195,105,0,0" VerticalAlignment="Top" Width="50" Height="50" />
+        <Button x:Name="case_2_1" Content="{Binding C_2_1}" Command="{Binding CaseClicked}" CommandParameter="C_2_1" HorizontalAlignment="Left" Margin="52,172,0,0" VerticalAlignment="Top" Width="50" Height="50" />
+        <Button x:Name="case_2_2" Content="{Binding C_2_2}" Command="{Binding CaseClicked}" CommandParameter="C_2_2" HorizontalAlignment="Left" Margin="123,172,0,0" VerticalAlignment="Top" Width="50" Height="50" />
+        <Button x:Name="case_2_3" Content="{Binding C_2_3}" Command="{Binding CaseClicked}" CommandParameter="C_2_3" HorizontalAlignment="Left" Margin="195,172,0,0" VerticalAlignment="Top" Width="50" Height="50" />
+        <Button x:Name="case_3_1" Content="{Binding C_3_1}" Command="{Binding CaseClicked}" CommandParameter="C_3_1" HorizontalAlignment="Left" Margin="52,244,0,0" VerticalAlignment="Top" Width="50" Height="50" />
+        <Button x:Name="case_3_2" Content="{Binding C_3_2}" Command="{Binding CaseClicked}" CommandParameter="C_3_2" HorizontalAlignment="Left" Margin="123,244,0,0" VerticalAlignment="Top" Width="50" Height="50" />
+        <Button x:Name="case_3_3" Content="{Binding C_3_3}" Command="{Binding CaseClicked}" CommandParameter="C_3_3" HorizontalAlignment="Left" Margin="195,244,0,0" VerticalAlignment="Top" Width="50" Height="50" />
     </Grid>
 </Window>
